@@ -1,31 +1,44 @@
-import { StyleSheet } from 'react-native';
+import React from 'react';
+import {SafeAreaView, StyleSheet} from 'react-native';
+import {widthPercentageToDP as wp} from "../constants/Layout";
+import CameraComponent from "../components/Camera";
+import {useNavigation} from "@react-navigation/native";
 
-import { Text, View } from 'react-native';
-import { RootTabScreenProps } from '../types';
+export default function CaptureIDScreen() {
+    const navigation = useNavigation();
 
-export default function WelcomeScreen({ navigation }: RootTabScreenProps<'WelcomeScreen'>) {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>
-        Welcome Screen
-      </Text>
-    </View>
-  );
+    const onProceedPress = () => {
+        navigation.navigate("SelfieScreen")
+    }
+    return (
+        <SafeAreaView style={styles.container}>
+            <CameraComponent onProceedPress={onProceedPress}/>
+        </SafeAreaView>
+    );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
+    container: {
+        flex: 1,
+        margin: wp(10),
+    },
+    textWrapper: {
+        alignItems: 'center',
+    },
+    title: {
+        fontSize: 30,
+        fontWeight: 'bold',
+        marginBottom: 20,
+        textAlign: "center"
+    },
+    description: {
+        fontSize: 20,
+        fontWeight: '400',
+        textAlign: "center"
+    },
+    separator: {
+        marginVertical: 30,
+        height: 1,
+        width: '80%',
+    },
 });
